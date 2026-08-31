@@ -43,6 +43,7 @@ yarn-error.log*
 *.pem
 .idea/
 .vscode/
+supabase/.temp/
 *.suo
 *.ntvs*
 *.njsproj
