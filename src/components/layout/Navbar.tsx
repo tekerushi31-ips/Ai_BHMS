@@ -129,8 +129,8 @@ export function Navbar({ user }: { user: UserSession | null }) {
                   >
                     <ShieldCheck className="w-4 h-4 text-purple-600 dark:text-purple-400" />
                     <div>
-                      <div className="font-medium text-slate-900 dark:text-slate-100">Admin Officer</div>
-                      <div className="text-[10px] text-slate-500 dark:text-slate-400">Knowledge Base Verifier</div>
+                      <div className="font-medium text-slate-900 dark:text-slate-100">Central Admin</div>
+                      <div className="text-[10px] text-slate-500 dark:text-slate-400">Platform Administrator</div>
                     </div>
                   </button>
                   <button

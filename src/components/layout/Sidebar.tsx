@@ -27,6 +27,8 @@ import {
   User,
   Sparkles,
   Settings,
+  Activity,
+  Sliders,
 } from "lucide-react";
 
 interface SidebarProps {
@@ -62,6 +64,7 @@ export function Sidebar({ role }: SidebarProps) {
 
   const doctorLinks: SidebarLinkItem[] = [
     { href: "/doctor/dashboard", label: "Overview", icon: LayoutDashboard },
+    { href: "/doctor/profile", label: "Doctor Profile", icon: User },
     { href: "/doctor/patients", label: "Patients Directory", icon: Users },
     { href: "/doctor/video-calls", label: "Video Consultations", icon: Video, badge: "Live" },
     { href: "/doctor/new-case", label: "Digital Case Sheet", icon: FilePlus },
@@ -86,10 +89,31 @@ export function Sidebar({ role }: SidebarProps) {
   ];
 
   const adminLinks: SidebarLinkItem[] = [
-    { href: "/admin", label: "Knowledge Management", icon: Shield },
-    { href: "/faculty", label: "Faculty Mentor Hub", icon: Users, badge: "Review" },
-    { href: "/doctor/dashboard", label: "Doctor Portal", icon: Users },
-    { href: "/student/dashboard", label: "Student Portal", icon: GraduationCapIcon },
+    { href: "/admin/dashboard", label: "Dashboard", icon: LayoutDashboard },
+    { href: "/admin/copilots", label: "Copilots Control", icon: Sparkles, badge: "4 Copilots" },
+    { href: "/admin/users", label: "All Users", icon: Users },
+    { href: "/admin/users/students", label: "└ Students", icon: Award },
+    { href: "/admin/users/doctors", label: "└ Doctors", icon: Users },
+    { href: "/admin/users/faculty", label: "└ Faculty", icon: UserCheck },
+    { href: "/admin/users/patients", label: "└ Patients", icon: Users },
+    { href: "/admin/users/admins", label: "└ Admins", icon: Shield },
+    { href: "/admin/clinical", label: "Clinical Hub", icon: Activity },
+    { href: "/admin/clinical/appointments", label: "└ Appointments", icon: Calendar },
+    { href: "/admin/clinical/video-consultations", label: "└ Video Calls", icon: Video },
+    { href: "/admin/education", label: "Education Hub", icon: BookOpen },
+    { href: "/admin/knowledge", label: "Knowledge Base", icon: Shield },
+    { href: "/admin/knowledge/repertory", label: "└ Repertory", icon: Layers },
+    { href: "/admin/knowledge/materia-medica", label: "└ Materia Medica", icon: BookOpen },
+    { href: "/admin/knowledge/organon", label: "└ Organon §", icon: FileText },
+    { href: "/admin/analytics", label: "Platform Analytics", icon: TrendingUp },
+    { href: "/admin/analytics/ai", label: "└ AI Analytics", icon: Sparkles },
+    { href: "/admin/notifications", label: "Announcements", icon: Bell },
+    { href: "/admin/system/feature-flags", label: "Feature Flags", icon: Sliders },
+    { href: "/admin/system/ai-settings", label: "AI Settings", icon: Settings },
+    { href: "/admin/system-health", label: "System Health", icon: TrendingUp, badge: "Live" },
+    { href: "/admin/security", label: "Security Center", icon: Shield },
+    { href: "/admin/audit-logs", label: "Audit Logs", icon: History },
+    { href: "/admin/settings", label: "Settings", icon: Settings },
   ];
 
   function GraduationCapIcon(props: any) {

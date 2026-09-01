@@ -113,7 +113,7 @@ export const DEMO_PRESET_USERS = {
   admin: {
     email: "admin@bhms.ai",
     password: "Password123!",
-    name: "Admin Officer",
+    name: "Central Admin",
     role: "ADMIN",
   },
 };

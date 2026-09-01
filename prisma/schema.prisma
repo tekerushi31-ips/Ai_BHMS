@@ -14,6 +14,7 @@ model User {
   name         String
   role         String    @default("STUDENT") // STUDENT, DOCTOR, ADMIN
   avatar       String?
+  isActive     Boolean   @default(true)
   createdAt    DateTime  @default(now())
   updatedAt    DateTime  @updatedAt
 
@@ -77,10 +78,30 @@ model StudentProfile {
 model DoctorProfile {
   id                 String   @id @default(cuid())
   userId             String   @unique
-  clinicName         String   @default("Homoeopathic Healing Centre")
-  registrationNumber String   @default("CCH-2018-9482")
+  phone              String?  @default("+91 98765 43210")
+  dateOfBirth        String?  @default("1985-06-15")
+  gender             String?  @default("Male")
+  qualification      String?  @default("B.H.M.S., M.D. (Hom.)")
+  degree             String?  @default("M.D. in Homoeopathic Philosophy")
   specialization     String   @default("Classical Homoeopathy & Chronic Diseases")
+  registrationNumber String   @default("CCH-2018-9482")
   yearsOfPractice    Int      @default(5)
+  languages          String?  @default("English, Hindi, Marathi")
+  consultationType   String?  @default("Online & Offline")
+  clinicName         String   @default("Homoeopathic Healing Centre")
+  clinicAddress      String?  @default("Suite 402, Medical Enclave, MG Road")
+  city               String?  @default("Pune")
+  state              String?  @default("Maharashtra")
+  pincode            String?  @default("411001")
+  clinicPhone        String?  @default("+91 20 2612 3456")
+  clinicEmail        String?  @default("contact@homoeohealing.com")
+  shortBio           String?  @default("Experienced Classical Homoeopathic practitioner specializing in constitutional prescribing and chronic disease management.")
+  areasOfPractice    String?  @default("Respiratory disorders, Dermatological cases, Autoimmune conditions, Pediatric Homoeopathy")
+  consultationDays   String?  @default("Mon, Tue, Wed, Thu, Fri, Sat")
+  availableStartTime String?  @default("09:00 AM")
+  availableEndTime   String?  @default("06:00 PM")
+  isOnlineConsultation Boolean @default(true)
+  isOfflineConsultation Boolean @default(true)
   createdAt          DateTime @default(now())
   updatedAt          DateTime @updatedAt
 
@@ -738,4 +759,17 @@ model PatientNotification {
 
   @@index([patientUserId])
   @@index([isRead])
+}
+
+model SystemSetting {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  value     String
+  category  String   @default("GENERAL") // FEATURE_FLAG, AI_CONFIG, SYSTEM
+  updatedBy String?
+  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now())
+
+  @@index([key])
+  @@index([category])
 }

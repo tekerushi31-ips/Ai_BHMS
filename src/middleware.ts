@@ -17,6 +17,8 @@ export async function middleware(request: NextRequest) {
     pathname.startsWith("/api/auth/login") ||
     pathname.startsWith("/api/auth/signup") ||
     pathname.startsWith("/api/auth/demo-login") ||
+    pathname.startsWith("/api/admin/auth/login") ||
+    pathname === "/admin/login" ||
     pathname.startsWith("/favicon.ico") ||
     pathname.startsWith("/public")
   ) {
@@ -58,7 +60,7 @@ export async function middleware(request: NextRequest) {
         return NextResponse.redirect(new URL("/patient/dashboard", request.url));
       }
       if (sessionUser.role === "ADMIN") {
-        return NextResponse.redirect(new URL("/admin", request.url));
+        return NextResponse.redirect(new URL("/admin/dashboard", request.url));
       }
     }
     return NextResponse.next();
@@ -109,7 +111,7 @@ export async function middleware(request: NextRequest) {
     }
   }
 
-  // 5. Protected Consultation Routes (Doctor & Patient only)
+  // 5. Protected Consultation Routes
   if (pathname.startsWith("/consultation")) {
     if (!sessionUser) {
       const loginUrl = new URL("/login", request.url);
@@ -128,10 +130,10 @@ export async function middleware(request: NextRequest) {
     }
   }
 
-  // 6. Protected Admin Routes
+  // 6. Protected Central Admin Routes
   if (pathname.startsWith("/admin")) {
     if (!sessionUser) {
-      const loginUrl = new URL("/login", request.url);
+      const loginUrl = new URL("/admin/login", request.url);
       loginUrl.searchParams.set("redirect", pathname);
       return NextResponse.redirect(loginUrl);
     }

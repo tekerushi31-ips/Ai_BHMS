@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import Link from "next/link";
 import {
   ShieldCheck,
   BookOpen,
@@ -110,13 +111,33 @@ export default function AdminPage() {
           </p>
         </div>
 
-        <button
-          onClick={() => setIsAddModalOpen(true)}
-          className="px-4 py-2 rounded-xl text-xs font-semibold text-white bg-purple-600 hover:bg-purple-700 dark:bg-purple-600 dark:hover:bg-purple-500 shadow-sm transition-colors flex items-center gap-1.5 self-start sm:self-auto"
-        >
-          <PlusCircle className="w-4 h-4" />
-          Add Knowledge Entry
-        </button>
+        <div className="flex flex-wrap items-center gap-2">
+          <Link
+            href="/admin/dashboard"
+            className="px-3 py-1.5 rounded-xl text-xs font-semibold text-purple-700 dark:text-purple-300 bg-purple-50 dark:bg-purple-950/60 border border-purple-200 dark:border-purple-800 hover:bg-purple-100 transition-colors"
+          >
+            Master Dashboard
+          </Link>
+          <Link
+            href="/admin/copilots"
+            className="px-3 py-1.5 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:bg-slate-100 transition-colors"
+          >
+            Copilots Control
+          </Link>
+          <Link
+            href="/admin/users"
+            className="px-3 py-1.5 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:bg-slate-100 transition-colors"
+          >
+            Users
+          </Link>
+          <button
+            onClick={() => setIsAddModalOpen(true)}
+            className="px-4 py-2 rounded-xl text-xs font-semibold text-white bg-purple-600 hover:bg-purple-700 dark:bg-purple-600 dark:hover:bg-purple-500 shadow-sm transition-colors flex items-center gap-1.5 self-start sm:self-auto"
+          >
+            <PlusCircle className="w-4 h-4" />
+            Add Knowledge Entry
+          </button>
+        </div>
       </div>
 
       {/* Verification Workflow Banner */}

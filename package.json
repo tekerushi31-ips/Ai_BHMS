@@ -9,8 +9,8 @@
     "lint": "next lint",
     "db:generate": "prisma generate",
     "db:push": "prisma db push",
-    "db:seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts",
-    "test:integration": "ts-node --compiler-options {\"module\":\"CommonJS\"} scripts/test-integration.ts"
+    "db:seed": "tsx prisma/seed.ts",
+    "test:integration": "tsx scripts/test-integration.ts"
   },
   "dependencies": {
     "@prisma/client": "^6.2.1",

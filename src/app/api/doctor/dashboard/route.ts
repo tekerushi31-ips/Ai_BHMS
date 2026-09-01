@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { getCurrentUser } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { calculateProfileCompletion } from "@/lib/doctor-profile";
 
 export async function GET() {
   const user = await getCurrentUser();
@@ -60,15 +61,45 @@ export async function GET() {
     }
   });
 
+  const fullDoctorData = {
+    name: user.name,
+    email: user.email,
+    avatar: user.avatar,
+    phone: profile?.phone || "",
+    dateOfBirth: profile?.dateOfBirth || "",
+    gender: profile?.gender || "Male",
+    qualification: profile?.qualification || "B.H.M.S., M.D. (Hom.)",
+    degree: profile?.degree || "M.D. in Homoeopathic Philosophy",
+    specialization: profile?.specialization || "Classical Homoeopathy & Chronic Diseases",
+    registrationNumber: profile?.registrationNumber || "CCH-2018-9482",
+    regNo: profile?.registrationNumber || "CCH-2018-9482",
+    yearsOfPractice: profile?.yearsOfPractice ?? 5,
+    languages: profile?.languages || "English, Hindi, Marathi",
+    consultationType: profile?.consultationType || "Online & Offline",
+    clinic: profile?.clinicName || "Homoeopathic Healing Centre",
+    clinicName: profile?.clinicName || "Homoeopathic Healing Centre",
+    clinicAddress: profile?.clinicAddress || "",
+    city: profile?.city || "",
+    state: profile?.state || "",
+    pincode: profile?.pincode || "",
+    clinicPhone: profile?.clinicPhone || "",
+    clinicEmail: profile?.clinicEmail || "",
+    shortBio: profile?.shortBio || "",
+    areasOfPractice: profile?.areasOfPractice || "",
+    consultationDays: profile?.consultationDays || "Mon, Tue, Wed, Thu, Fri, Sat",
+    availableStartTime: profile?.availableStartTime || "09:00 AM",
+    availableEndTime: profile?.availableEndTime || "06:00 PM",
+    isOnlineConsultation: profile?.isOnlineConsultation ?? true,
+    isOfflineConsultation: profile?.isOfflineConsultation ?? true,
+  };
+
+  const completion = calculateProfileCompletion(fullDoctorData);
+
   return NextResponse.json({
-    doctor: {
-      name: user.name,
-      email: user.email,
-      regNo: profile?.registrationNumber || "CCH-VERIFIED",
-      clinic: profile?.clinicName || "Homoeopathic Healing Centre",
-      specialization: profile?.specialization || "Classical Homoeopathy",
-      yearsOfPractice: profile?.yearsOfPractice || 5,
-    },
+    doctor: fullDoctorData,
+    profileCompletion: completion.percentage,
+    missingFields: completion.missingFields,
+    isProfileComplete: completion.percentage >= 80,
     metrics: {
       totalPatients,
       newCasesThisMonth,
